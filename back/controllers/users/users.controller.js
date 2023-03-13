@@ -30,8 +30,8 @@ const usersController = {
             password: req.body.password,
             birthdate: '1997-07-21T00:03:13.000Z'
         }
-        await User.signup(newUser)
-        const token = await tokenGenerator(newUser)
+        const id = await User.signup(newUser)
+        const token = await tokenGenerator({_id: id, email: newUser.email})
         res.json(token)
     },
 

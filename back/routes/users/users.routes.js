@@ -8,7 +8,7 @@ usersRouter.get('/', usersController.getAll)
 
 usersRouter.get('/profil', authentificateJWT,usersController.getOne)
 
-usersRouter.post('/', usersController.signup)
+usersRouter.post('/signup', usersController.signup)
 
 usersRouter.post('/login', usersController.login)
 

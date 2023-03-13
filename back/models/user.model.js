@@ -14,7 +14,8 @@ const User = {
     },
 
     async signup(user) {
-        db.getDb().collection('users').insertOne(user)
+        const newUser = await db.getDb().collection('users').insertOne(user)
+        return newUser.insertedId.toString()
     },
 
     async findByEmail(email){
