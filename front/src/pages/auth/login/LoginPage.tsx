@@ -13,7 +13,7 @@ const LoginPage = () => {
         <Login />
       </div>
       <div>
-        <p>Don't have an account <Link to={'signup'}>signup here</Link> </p>
+        <p>Don't have an account <Link to={'/signup'}>signup here</Link> </p>
       </div>
     </main>
   )

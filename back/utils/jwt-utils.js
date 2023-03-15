@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const generateJWT = ({_id, email}) => {
     return new Promise((resolve, reject) => {
         const data = {_id, email}
-        const secret = process.env.JWT_secret || 'xIJH9yz8hspB5AU6EG0qSf4tAPhnsVczaImX4TpW'
+        const secret = process.env.JWT_secret
         const options = {
             algorithm: 'HS512',
             expiresIn: '12h'
@@ -26,7 +26,7 @@ const decodeJWT = (token) => {
     }
 
     return new Promise((resolve, reject) => {
-        const secret = process.env.JWT_secret || 'xIJH9yz8hspB5AU6EG0qSf4tAPhnsVczaImX4TpW'
+        const secret = process.env.JWT_secret
         jwt.verify(token, secret, (error, data) => {
             if(error){
                 return reject(error)
