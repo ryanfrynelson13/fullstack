@@ -9,7 +9,7 @@ const User = {
     },
 
     async findAll() {
-        const users = await db.getDb().collection('users').find({}).toArray()
+        const users = await db.getDb().collection('users').find({}).project({email: false, password: false}).toArray()
         return users
     },
 

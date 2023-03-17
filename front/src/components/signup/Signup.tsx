@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import axios from 'axios'
 import classes from './signup.module.css'
 import { useForm, SubmitHandler } from "react-hook-form"
-import SignupForm from "../../types/signup-form"
+import SignupForm from "../../types/signup-form.type"
 
 import * as yup from 'yup'
 import {yupResolver} from '@hookform/resolvers/yup'
@@ -48,7 +48,6 @@ const Signup = () => {
 
         axios.post('http://localhost:3000/users/signup',body)
             .then(res => {
-                console.log(res.data.token)
                 localStorage.setItem('tokenObj', JSON.stringify(res.data))
                 navigate('/')
             })

@@ -17,8 +17,8 @@ const usersController = {
     },
 
     async getAll (req, res){
-        const users = await User.findAll()
-        
+        const users = await User.findAll() 
+        console.log(users[0])    
         res.json(users)
     },
 
@@ -30,6 +30,8 @@ const usersController = {
             password: req.body.password,
             birthdate: '1997-07-21T00:03:13.000Z'
         }
+        const {exists} = await User.alreadyExists(req.body.email)
+        if(exists) return res.send('user already exists')
         const id = await User.signup(newUser)
         const token = await tokenGenerator({_id: id, email: newUser.email})
         res.json(token)

@@ -21,6 +21,7 @@ const Login = () => {
     })
     
     if(data.validated){
+      console.log('yo')
       localStorage.setItem('tokenObj', JSON.stringify(data.payload))      
       navigate('/')       
     }

@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import UserType from "../../types/user.type"
+import UserCard from "../../components/user-card/UserCard"
 
 const LandingPage = () => {
   const navigate = useNavigate()
-  const [user, setUser] = useState<{id: string, email: string} | null>(null)
+  const [currUser, setCurrUser] = useState<{id: string, email: string} | null>(null)
+  const [allUsers, setAllUsers] = useState<UserType[]>([])
 
   useEffect(() => {
     let tokenObj = localStorage.getItem('tokenObj')
@@ -18,18 +21,34 @@ const LandingPage = () => {
          }
       })
         .then(res => {
-          setUser({id: res.data.id, email: res.data.email})
+          setCurrUser({id: res.data.id, email: res.data.email})
         })
         .catch(err => console.log(err))
     
     }
+
+    axios.get<UserType[]>('http://localhost:3000/users')
+      .then(({data}) => {
+        setAllUsers(data)
+      })
+      .catch(err => console.log(err))
     
     
   },[])
    
-
+  
   return (
-    <div>email: {user?.email}</div>
+    <div>
+      <p>email: {currUser?.email}</p>
+      <div>
+        <h2>Users:</h2>
+        {
+          allUsers.length > 0  && allUsers.map((user: UserType) => (
+            <UserCard key={user._id} {...user} />
+          ))
+        }
+      </div>
+    </div>
   )
 }
 
